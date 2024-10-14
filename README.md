@@ -22,14 +22,14 @@ how to plug a chat web app connect to argus accelerator to show the data for end
 - Activate virtual ennvironment: .venv\scripts\activate
 - Install required libraries: pip install -r requirements.txt
 - Replace keys with your own values in Argus.env
-- don't forget to have the model openAI one text-embbeding and one GPT ( can be 4.0 ,3.5 ) ... 
+- don't forget to have the model openAI one text-embbeding and one GPT4-o  .. 
 
 ## Demo script
 - Open "cosmosddbnosql.ipynb" python notebook
 - Create the database in your Cosmosdb account , and be sure the features Vector Search for NoSQL API (preview) is turn on , if you turn on , you may wait several minutes to execute the code 
 - Run the cells to create create the container and populate the Cosmos DB database with different data 
 - The last cell launch Gradio UI 
-- if you ingest the samples pdf and word  file, you can ask these questions :
+- if you ingest the samples who are in argus repository  :
 
-"Groupama ? "
-"Tell me about proposal for services ? "
+you can ask for : Dottore di Ricerca Responsabile Chirurgia Oculistica Clinica Rugani ? 
+the ask should be based on your documents.... 
