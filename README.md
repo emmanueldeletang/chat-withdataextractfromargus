@@ -2,7 +2,8 @@
 how to plug a chat web app connect to argus accelerator to show the data for end user 
 
 # architecture 
-![image](https://github.com/user-attachments/assets/71f4625c-3343-404f-9f73-b99c9074f681)
+![image](https://github.com/user-attachments/assets/a758cced-6521-41f4-93f2-b1827797c918)
+
 
 ## Features
 - Vector search using Azure Cosmos DB for NoSQL
