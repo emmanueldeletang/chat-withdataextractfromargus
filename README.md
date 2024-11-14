@@ -25,6 +25,17 @@ how to plug a chat web app connect to argus accelerator to show the data for end
 - Replace keys with your own values in Argus.env
 - don't forget to have the model openAI one text-embbeding and one GPT4-o  .. 
 
+## Setup to get a web application with flask framework 
+- Create virtual environment: python -m venv .venv
+- Activate virtual ennvironment: .venv\scripts\activate
+- Install required libraries: pip install -r requirements.txt
+- Replace keys with your own values in Argus.env
+- make sure the templates with the jinja is present ... 
+- make a pip install of flask ( pip install flask )
+
+
+
+
 ## Demo script
 - Open "Argusconnect.ipynb" python notebook
 - Connect inside the .env to the ARGUS Cosmosdb account , and be sure the features Vector Search for NoSQL API (preview) is turn on , if you turn on , you may wait several minutes to execute the code 
@@ -34,3 +45,9 @@ how to plug a chat web app connect to argus accelerator to show the data for end
 
 you can ask for : Dottore di Ricerca Responsabile Chirurgia Oculistica Clinica Rugani ? 
 the ask should be based on your documents.... 
+
+## Demo script with the flask application 
+- Run the application using python.exe app.py .
+- I am not an html expert , so feel free to modidy the jinja template and purpose to me to get better UI 
+
+
