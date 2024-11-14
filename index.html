@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Your Data</title>
+    <style>
+        .chat-container {
+            width: 50%;
+            margin: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .chat-box {
+            height: 300px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .chat-message {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+            <form method="post" action="/send_message">
+            <h2>Chat with your data from argus </h2>
+
+            <div class="field textarea">
+                {{message}}
+                <changeit cols="30" rows="10" placeholder="Explain your queries.." required></changeit>
+              </div>
+
+            <div class="chat-box" id="chat-box" >
+                {{message}}
+                                
+                </div>
+            <input type="text" name="username" placeholder="Enter your name" style="width: 100%; margin-bottom: 10px;">
+            <input type="text" name="message" placeholder="Ask me about Your Data!" style="width: 100%; margin-bottom: 10px;">
+            <button onclick="loaddata()">Load Data</button>
+            <button onclick="clearcache()">Clear Cache</button>
+            <button onclick="sendMessage()">Send</button>
+            <button onclick="clearChat()">Clear</button>
+        </form>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const message = document.getElementById('message').value;
+            const username = document.getElementById('username').value;
+            if (message.trim() === '') return;
+
+            fetch('/send_message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: JSON.stringify({ username: username, message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                updateChatBox(data.chat_history);
+                document.getElementById('message').value = '';
+            });
+        }
+
+        function clearChat() {
+            fetch('/clear', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                updateChatBox(data.chat_history);
+            });
+        }
+        function loaddata() {
+            fetch('/loaddata', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Load data function called", data);
+                // Handle the response data here
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function clearcache() {
+            fetch('/clearcache', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Clear cache function called", data);
+                // Handle the response data here
+            })
+            .catch(error => console.error('Error:', error));
+        }
+        function updateChatBox(chat_history) {
+            const chatBox = document.getElementById('chat-box');
+            chatBox.innerHTML = '';
+            chat_history.forEach(chat => {
+                const userMessage = document.createElement('div');
+                userMessage.className = 'chat-message';
+                userMessage.textContent = `User: ${chat[0]}`;
+                chatBox.appendChild(userMessage);
+
+                const botResponse = document.createElement('div');
+                botResponse.className = 'chat-message';
+                botResponse.textContent = `Bot: ${chat[1]}`;
+                chatBox.appendChild(botResponse);
+            });
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
